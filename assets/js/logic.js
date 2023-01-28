@@ -9,8 +9,24 @@ let submitButton = document.querySelector("#submit");
 // listen for the start quiz button being pressed
 startQuizButton.addEventListener("click", function(event) {
     startScreenClass.toggleAttribute("hidden"); // clear the screen
-    
+    countdown(); // run the countdown timer
 });
+
+// countdown timer - slightly modified version from the class '10-STU-TIMERS-INTERVALS' 
+function countdown() {
+    let timeLeft = 15;
+    var timeInterval = setInterval(function () {
+        if (timeLeft > 0) {
+            timeDisplay.textContent = timeLeft;
+            timeLeft--;
+        }
+        else { 
+            timeDisplay.textContent = "0";
+            clearInterval(timeInterval);
+        }
+    }, 1000);
+}
+
 
 
 

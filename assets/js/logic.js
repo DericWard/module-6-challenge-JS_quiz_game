@@ -43,14 +43,13 @@ function countdown() {
 };
 
 // test screen write
-function displayAnswerButton() { // this function could be in a loop for the length 
-    // of the number of answer choices
-    let button1 = document.createElement("button"); // define and create a button
+function displayAnswerButtons() { 
+    let button1 = document.createElement("button"); 
     let button2 = document.createElement("button");
     let button3 = document.createElement("button");
     let button4 = document.createElement("button");
     
-    let button1Text = document.createTextNode(quizQuestions[0].answers[0]); // define 
+    let button1Text = document.createTextNode(quizQuestions[0].answers[0]);  
     let button2Text = document.createTextNode(quizQuestions[0].answers[1]);
     let button3Text = document.createTextNode(quizQuestions[0].answers[2]);
     let button4Text = document.createTextNode(quizQuestions[0].answers[3]);
@@ -65,6 +64,23 @@ function displayAnswerButton() { // this function could be in a loop for the len
     body.appendChild(button3);
     body.appendChild(button4);
 
+    button1.classList.add("buttonClass");
+    button2.classList.add("buttonClass");
+    button3.classList.add("buttonClass");
+    button4.classList.add("buttonClass");
+    
+    let buttonListener = document.querySelectorAll(".buttonClass");
+
+    // buttonListener.forEach(function (i) {
+    //     console.log(i.textContent);
+    // });
+
+    for (i of buttonListener) {
+        i.addEventListener("click", function() {
+            let selectedAnswer = this.textContent;
+            console.log(selectedAnswer);
+        });
+    }
 
 };
 
@@ -75,7 +91,7 @@ function startQuiz() {
     startQuizButton.addEventListener("click", function(event) {
     startScreenClass.toggleAttribute("hidden"); // clear the screen
     countdown(); // run the countdown timer
-    displayAnswerButton();
+    displayAnswerButtons();
 });
 };
 

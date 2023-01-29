@@ -1,7 +1,7 @@
 const quizQuestions = [
     {
         "question": "Javascript is a ... :",
-        "answers": ["Coffee", "Vegetable", "Scripting language", "Country"],
+        "answers": ["Coffee", "Ancient scroll", "Scripting language", "Typeface"],
         "correctAnswer": 2,
     },
     {
@@ -16,6 +16,9 @@ const quizQuestions = [
     },    
 ];
 
+// console.log(quizQuestions[0].question);
+// console.log(quizQuestions[0].answers[1]);
+// console.log(quizQuestions[0].answers.length);
 
 const body = document.body;
 const startScreen = document.querySelector("#start-screen");
@@ -40,16 +43,17 @@ function countdown() {
 };
 
 // test screen write
-function displayAnswerButton() {
-    let button1 = document.createElement("button");
+function displayAnswerButton() { // this function could be in a loop for the length 
+    // of the number of answer choices
+    let button1 = document.createElement("button"); // define and create a button
     let button2 = document.createElement("button");
     let button3 = document.createElement("button");
     let button4 = document.createElement("button");
     
-    let button1Text = document.createTextNode("Answer 1");
-    let button2Text = document.createTextNode("Answer 2");
-    let button3Text = document.createTextNode("Answer 3");
-    let button4Text = document.createTextNode("Answer 4");
+    let button1Text = document.createTextNode(quizQuestions[0].answers[0]); // define 
+    let button2Text = document.createTextNode(quizQuestions[0].answers[1]);
+    let button3Text = document.createTextNode(quizQuestions[0].answers[2]);
+    let button4Text = document.createTextNode(quizQuestions[0].answers[3]);
 
     button1.appendChild(button1Text);
     button2.appendChild(button2Text);
@@ -60,6 +64,8 @@ function displayAnswerButton() {
     body.appendChild(button2);
     body.appendChild(button3);
     body.appendChild(button4);
+
+
 };
 
 // listen for the start quiz button being pressed
@@ -72,8 +78,6 @@ function startQuiz() {
     displayAnswerButton();
 });
 };
-
-
 
 startQuiz();
 

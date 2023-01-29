@@ -1,14 +1,33 @@
-let body = document.body;
-let startScreen = document.querySelector("#start-screen");
-let finalScore = document.querySelector("#final-score");
-let playerInitials = document.querySelector("#initials");
-let submitPlayerIntials = document.querySelector("#submit");
+const quizQuestions = [
+    {
+        "question": "Javascript is a ... :",
+        "answers": ["Coffee", "Vegetable", "Scripting language", "Country"],
+        "correctAnswer": 2,
+    },
+    {
+        "question": "Boolean refers to ... :",
+        "answers": ["Abacus", "Vegetable", "Scripting language", "True/False"],
+        "correctAnswer": 3,
+    },
+    {
+        "question": "Javascript can have ... :",
+        "answers": ["Socks", "Buttons", "Gloves", "Collars"],
+        "correctAnswer": 1,
+    },    
+];
+
+
+const body = document.body;
+const startScreen = document.querySelector("#start-screen");
+const finalScore = document.querySelector("#final-score");
+const playerInitials = document.querySelector("#initials");
+const submitPlayerIntials = document.querySelector("#submit");
 
 // countdown timer - slightly modified version from the class exercise '10-STU-TIMERS-INTERVALS' 
 function countdown() {
-    let timeDisplay = document.querySelector("#time");
+    const timeDisplay = document.querySelector("#time");
     let timeLeft = 3; //make this maybe 30 seconds
-    var timeInterval = setInterval(function () {
+    let timeInterval = setInterval(function () {
         if (timeLeft > 0) {
             timeDisplay.textContent = timeLeft;
             timeLeft--;

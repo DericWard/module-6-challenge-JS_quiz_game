@@ -1,88 +1,37 @@
-# Module 6 Challenge Web APIs: Code Quiz
-
-## Your Task
-
-As you proceed in your journey to becoming a front-end web developer, it’s likely that you’ll be asked to complete a coding assessment, perhaps as part of an interview process. A typical coding assessment is a combination of multiple-choice questions and interactive coding challenges. 
-
-To help you become familiar with these tests and give you a chance to apply the skills from this module, this week’s challenge invites you to build a timed coding quiz with multiple-choice questions. This app will run in the browser, and will feature dynamically updated HTML and CSS powered by JavaScript code that you write. It will have a clean, polished, and responsive user interface. This week’s coursework has taught you all the skills you need to succeed in this challenge.
-
-
-## User Story
-
-```
-AS A coding boot camp student
-I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
-SO THAT I can gauge my progress compared to my peers
-```
-
-## Acceptance Criteria
-
-Create a code quiz that contains the following requirements:
-
-* A start button that when clicked a timer starts and the first question appears.
- 
-  * Questions contain buttons for each answer.
-  * 
-  * When answer is clicked, the next question appears
-  * 
-  * If the answer clicked was incorrect then subtract time from the clock
-
-* The quiz should end when all questions are answered or the timer reaches 0.
-
-  * When the game ends, it should display their score and give the user the ability to save their initials and their score
-  
-## Mock-Up
-
-The following animation demonstrates the application functionality:
-
-![Animation of code quiz. Presses button to start quiz. Clicks the button for the answer to each question, displays if answer was correct or incorrect. Quiz finishes and displays high scores. User adds their intials, then clears their intials and starts over.](./assets/08-web-apis-challenge-demo.gif)
-
-## Grading Requirements
-
-This challenge is graded based on the following criteria: 
-
-### Technical Acceptance Criteria: 40%
-
-* Satisfies all of the above acceptance criteria.
-
-### Deployment: 32%
-
-* Application deployed at live URL.
-
-* Application loads with no errors.
-
-* Application GitHub URL submitted.
-
-* GitHub repository that contains application code.
-
-### Application Quality: 15%
-
-* Application user experience is intuitive and easy to navigate.
-
-* Application user interface style is clean and polished.
-
-* Application resembles the mock-up functionality provided in the challenge instructions.
-
-### Repository Quality: 13%
-
-* Repository has a unique name.
-
-* Repository follows best practices for file structure and naming conventions.
-
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
-
-* Repository contains multiple descriptive commit messages.
-
-* Repository contains quality README file with description, screenshot, and link to deployed application.
+## Module 6 Challenge Web APIs: JavaScript quiz game
+### Description:
+#### A timed quiz that asks the player JavaScript-related questions and penalizes the player 10 seconds for each incorrect answer.
+#### The player will score zero if they: 1. Answer no questions.
+####                                     2. Answer all questions incorrectly.
+####                                     3. Fail to complete the quiz before the counter gets to zero.
+#### Otherwise the user's score is determined by the remaining time.
+#### Players can save their initials on a leaderboard, that displays their initials along with their score.
+#### The leaderboard is sorted from highest score first to lowest score last.
+#### Players have the option to clear the leaderboard.
+#### Players have the option to view the leaderboard at any point before, during, or after the quiz.
+#### Incorrect answers will result in a nasty sound being played.
+#### Correct answers will result in a different, but still nasty, sound being played.
+#### The remaining time left before the quiz automatically ends is displayed at the top-right of the screen.
+#### 'correct!' or 'incorrect!' is diplayed below the answer choices once a player has answered a question.
+#### The quiz automatically progresses to the next question after each question is answered, without player intervention.
+### Motivation:
+#### To satisfy assignment  of edX's Front End Web Development bootcamp course to gain further practical experience
+#### using web APIs and DOM manipulation via JavaScript and implement local storage.
+### Installation:
+#### To install this app please clone: https://github.com/DericWard
+### Live site:
+#### To use this app and see it in operation please visit: https://dericward.github.io/module-6-challenge-JS_quiz_game/
+### Tests:
+#### Simply play the quiz, and answer (or don't answer) the questions and ensure the behaviour is as expected.
+#### You should be able to play the quiz, with audible feedback for correct/incorrect answers, and be given a score.
+#### Save your initials on a leaderboard.
+#### Clear the leaderboard.
+#### Access the leaderboard at any point before or during the quiz.
+#### The leaderboard should be persistent until cleared by the player, even if they close the quiz or navigate away from it.
+#### Ensure the operation of the quiz is as explained in this document.
+### App Screenshots:
+![quiz-home](https://user-images.githubusercontent.com/50495939/219992166-9e21503e-1b57-4cc2-ae66-098688808272.PNG)
+![quiz-question](https://user-images.githubusercontent.com/50495939/219992226-400246fe-a810-4e4a-8fba-aa90da192247.PNG)
+![quiz-hiScores](https://user-images.githubusercontent.com/50495939/219992287-75b746a2-e3de-4154-b59d-767d8de22445.PNG)
 
 
-## Review
-
-You are required to submit BOTH of the following for review:
-
-* The URL of the functional, deployed application.
-
-* The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
-
----
-© 2022 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.

@@ -12,6 +12,7 @@
 #### The leaderboard is sorted from highest score first to lowest score last.
 #### Players have the option to clear the leaderboard.
 #### Players have the option to view the leaderboard at any point before, during, or after the quiz.
+#### Leaderboard stays persistent for the player until they clear it, regardless of whether they close the quiz.
 #### Incorrect answers will result in a nasty sound being played.
 #### Correct answers will result in a different, but still nasty, sound being played.
 #### The remaining time left before the quiz automatically ends is displayed at the top-right of the screen.

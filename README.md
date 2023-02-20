@@ -1,10 +1,13 @@
 ## Module 6 Challenge Web APIs: JavaScript quiz game
 ### Description:
 #### A timed quiz that asks the player JavaScript-related questions and penalizes the player 10 seconds for each incorrect answer.
-#### The player will score zero if they: ####1. Answer no questions.
-####                                     2. Answer all questions incorrectly.
-####                                     3. Fail to complete the quiz before the counter gets to zero.
+####
+#### The player will score zero if they: 
+#### 1. Answer no questions.
+#### 2. Answer all questions incorrectly.
+#### 3. Fail to complete the quiz before the counter gets to zero.
 #### Otherwise the user's score is determined by the remaining time.
+####
 #### Players can save their initials on a leaderboard, that displays their initials along with their score.
 #### The leaderboard is sorted from highest score first to lowest score last.
 #### Players have the option to clear the leaderboard.

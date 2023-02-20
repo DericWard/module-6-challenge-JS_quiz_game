@@ -1,132 +1,160 @@
+// array of questions and answers for the quiz
 const quizQuestions = [
     {
         "question": "Javascript is a ... ",
         "answers": ["Coffee", "Ancient scroll", "Scripting language", "Typeface"],
-        "correctAnswer": "Scripting language",
+        "correctAnswerIndex": 2,
     },
     {
         "question": "Boolean refers to ... ",
         "answers": ["Abacus", "Vegetable", "Board game", "True/False"],
-        "correctAnswer": "True/False",
+        "correctAnswerIndex": 3,
     },
     {
-        "question": "Javascript can implement ... ",
-        "answers": ["Socks", "Buttons", "Gloves", "Collars"],
-        "correctAnswer": "Buttons",
+        "question": "Javascript can modify ... ",
+        "answers": ["Socks", "Buttons", "Gloves", "Hats"],
+        "correctAnswerIndex": 1,
     },    
 ];
 
-const body = document.body;
-// const startScreen = document.getElementById("#start-screen");
-const finalScore = document.querySelector("#final-score");
-const playerInitials = document.getElementById("#initials");
-const submitPlayerIntials = document.getElementById("#submit");
-const questionTitle = document.querySelector("#question-title");
-const choicesSection = document.querySelector("#choices");
-const timeDisplay = document.querySelector("#time");
+let timeLeft = (quizQuestions.length * 10); // set the time for the quiz to (10s x number of questions)
+let questionIndex = 0;
+let questionAnswered = 0; // check if the user has answered a question
 
-let timeLeft = 0;
-let questions = document.getElementById("questions");
+const timerDisplay = document.getElementById("time"); // HTML elements
+const questionsDiv = document.getElementById("questions");
+const feedbackDisplay = document.getElementById("feedback");
 
-questionTitle.textContent = quizQuestions[0].question;
-questionTitle.style.textAlign = "center";
-choicesSection.style.textAlign = "center";
-console.log(questionTitle.textContent);
-body.append(questionTitle);
+const correctSound = new Audio("./assets/sfx/correct.wav"); // define the strange sounds for correct
+const incorrectSound = new Audio("./assets/sfx/incorrect.wav"); // and incorrect answers
 
-function endQuiz(){
-    console.log("End quiz");
-    const endScreen = document.querySelector("#end-screen");
-    endScreen.toggleAttribute("hidden");
-    questions.toggleAttribute("hidden");
+// at quiz end, display final score, ensure it is non-negative and
+// make the score zero if the user has not answered any questions,
+// otherwise set the user's score to how much time was left 
+function endQuiz() {
+    let endScreen = document.getElementById("end-screen");
+    let finalScoreDisplay = document.getElementById("final-score");
+    feedbackDisplay.setAttribute("class", "hide"); 
+    questionsDiv.setAttribute("class", "hide");
+    endScreen.toggleAttribute("class");
+    if((timeLeft < 0) || (questionAnswered === 0)) {
+        timerDisplay.textContent = 0;
+    };
+    finalScoreDisplay.textContent = timerDisplay.textContent;
 };
 
-// countdown timer - slightly modified version from the class exercise '10-STU-TIMERS-INTERVALS' 
-function countdown() {
-    // const timeDisplay = document.querySelector("#time");
-    timeLeft = 2; // 2s for testing only - make this maybe 30 seconds?
-    const timeInterval = setInterval(function () {
-        if (timeLeft > 0) {
-            timeDisplay.textContent = timeLeft;
-            timeLeft--;
-        }
-        else { 
-            timeDisplay.textContent = "0";
-            clearInterval(timeInterval);
-            questionTitle.textContent = quizQuestions[1].question; // test output
-            endQuiz();
-        }
-    }, 1000);
-    return;
-};
-
-function buttonClicks() {
-    const buttonListener = document.querySelectorAll(".buttonClass");
-
-    //displayAnswerButtons();
-
-    buttonListener.forEach(function (i) {
-        i.addEventListener("click", function() {
-            let selectedAnswer = i.textContent;
-            if (selectedAnswer === quizQuestions[0].correctAnswer) {
-                console.log("Correct answer!");
+// when the user presses the submit button, read the user's initials text input
+// and append it to the highscores array, if the array doesn't exist create it.
+// ensure non-negative values. Load the highscroes.html page
+function saveScore() {
+    let submitButton = document.getElementById("submit");
+    submitButton.addEventListener("click", function() {
+        let initialsDisplay = document.getElementById("initials");
+        let initials = initialsDisplay.value.trim();
+        if(initials !== "") {
+            let highScores = JSON.parse(localStorage.getItem("highscores")) || [];
+            if (timeLeft < 0) {
+                timeLeft = 0;
             }
-            else {
-                console.log("Wrong answer!");
+            let newScore = {
+                score: timeLeft,
+                player: initials,
             }
+        highScores.push(newScore);
+        localStorage.setItem("highscores", JSON.stringify(highScores));
+        window.location.href = "./assets/html/highscores.html";
+        };
         });
-     });
 };
 
-function startQuiz() {
-    const startQuizButton = document.querySelector("#start");
-    const startScreen = document.querySelector("#start-screen");
+// display the current question
+function displayQuestion() {
+    let questionDisplay = document.getElementById("question-title");
+    let currentQuestion = quizQuestions[questionIndex];
+    questionDisplay.textContent = currentQuestion.question;
+    displayAnswerButtons(currentQuestion);
+};
 
-    startQuizButton.addEventListener("click", function() {
-        startScreen.toggleAttribute("hidden");
-        questions.toggleAttribute("hidden");
-    countdown();
-    
+// move to the next question in the array, if at the end of the array
+// end the quiz, otherwise call the displayQuestion function
+function nextQuestion() {
+    questionIndex++; 
+    if(questionIndex === quizQuestions.length) {
+        timerDisplay.textContent = timeLeft;
+        endQuiz();
+    }
+    else {
+        displayQuestion();
+    };
+};
+
+// check if the index referenced in the correct answer part of the array
+// does not match the index of the correct answer in the answers part of the array,
+// if the user answer does not match, deduct 10s from the timer, display 'incorrect',
+// and play a strange sound to indicate an incorrect answer.
+// Otherwise, display 'correct' and play a diferent strange sound.
+// increment the counter that determines if the user has answwred a question.
+function checkAnswer() {
+    feedbackDisplay.toggleAttribute("class"); 
+    if(this.value !== quizQuestions[questionIndex].answers[quizQuestions[questionIndex].correctAnswerIndex]) {
+        timeLeft -= 10;    
+        feedbackDisplay.textContent = "Incorrect!"
+        incorrectSound.play();
+    }
+    else {
+        feedbackDisplay.textContent = "Correct!";
+        correctSound.play();   
+    };
+    questionAnswered ++;
+    nextQuestion();
+};
+
+// get the answer choices from the questions/answers array and
+// display wach anser in a button
+function displayAnswerButtons(currentQuestion) {
+    let choicesDisplay = document.getElementById("choices");
+    choicesDisplay.innerHTML = "";
+    currentQuestion.answers.forEach(function(choice, index) {
+        let choiceButton = document.createElement("button");
+        choiceButton.setAttribute("value", choice);
+        choiceButton.textContent = currentQuestion.answers[index];
+        choicesDisplay.append(choiceButton);
+        choiceButton.addEventListener("click", checkAnswer);
     });
 };
 
+// time function that ends the quiz if the time runs out or all
+// of the questions have been attempted.
+// otherwise call the ask another question function
+function countdown() {
+    let timer;
+    timer = setInterval(function() {
+        if((timeLeft <= 0) || (questionIndex === quizQuestions.length)) {
+            clearInterval(timer);
+            saveScore();
+            endQuiz();
+        }
+        else {
+            timerDisplay.textContent = timeLeft;
+            timeLeft--;
+        };
+    }, 1000);
+    displayQuestion();
+};
+
+// listen for the user to start the quiz, hide the home screen, start the timer.
+function startQuiz(){
+    let startButton = document.getElementById("start");
+    let startScreen = document.getElementById("start-screen");
+    startButton.addEventListener("click", function() {
+        startScreen.setAttribute("class", "hide"); //hide the startscreen elements
+        questionsDiv.toggleAttribute("class");  // unhide the questionsDiv elements
+        countdown(); // start the countdown timer function
+    });
+};
+
+// call the start the quiz function to listen for the user to press the start button
 startQuiz();
-
-// 
-
-// console.log(quizQuestions.length);
-
-// function buttonClicks() {
-
-//     let buttonListener = document.querySelectorAll(".buttonClass");
-
-//     displayAnswerButtons();
-
-//     buttonListener.forEach(function (i) {
-//         i.addEventListener("click", function() {
-//             let selectedAnswer = i.textContent;
-//             if (selectedAnswer === quizQuestions[0].correctAnswer) {
-//                 console.log("Correct answer!");
-//             }
-//             else {
-//                 console.log("Wrong answer!");
-//             }
-//         });
-//      });
-// };
-// };
-
-// listen for the start quiz button being pressed
-
-
-// startQuiz();
-
-
-
-// console.log(quizQuestions[0].question);
-// console.log(quizQuestions[0].answers[1]);
-// console.log(quizQuestions[0].answers.length);
-//console.log(quizQuestions[0].correctAnswer);
 
 
 

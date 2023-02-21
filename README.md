@@ -19,7 +19,7 @@
 #### 'correct!' or 'incorrect!' is diplayed below the answer choices once a player has answered a question.
 #### The quiz automatically progresses to the next question after each question is answered, without player intervention.
 ### Motivation:
-#### To satisfy assignment  of edX's Front End Web Development bootcamp course to gain further practical experience
+#### To satisfy assignment 6 of edX's Front End Web Development bootcamp course to gain further practical experience
 #### using web APIs and DOM manipulation via JavaScript and implement local storage.
 ### Installation:
 #### To install this app please clone: https://github.com/DericWard/module-6-challenge-JS_quiz_game

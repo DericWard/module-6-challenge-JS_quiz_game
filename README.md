@@ -22,7 +22,7 @@
 #### To satisfy assignment  of edX's Front End Web Development bootcamp course to gain further practical experience
 #### using web APIs and DOM manipulation via JavaScript and implement local storage.
 ### Installation:
-#### To install this app please clone: https://github.com/DericWard
+#### To install this app please clone: https://github.com/DericWard/module-6-challenge-JS_quiz_game
 ### Live site:
 #### To use this app and see it in operation please visit: https://dericward.github.io/module-6-challenge-JS_quiz_game/
 ### Tests:
